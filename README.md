@@ -1,4 +1,4 @@
-# NIC2DOB
+# NIC to DOB
 Extract Date of Birth from NIC number
 
 See How It Works : <a href="https://gh0sth4cker.github.io/NIC2DOB">Live URL</a>
