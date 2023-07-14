@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>Easy Code Stuff - NIC Birth Day Finder</title>
+    <script>
+        $(document).ready(function () {
+            $("#find").click(function () {
+                //Clear Existing Details
+                $("#error").html("");
+                $("#gender").html("");
+                $("#bday").html("");
+                
+
+                var NICNo = $("#nic").val();
+                var dayText = 0;
+                var year = "";
+                var month = "";
+                var day = "";
+                var gender = "";
+                if (NICNo.length != 10 && NICNo.length != 12) {
+                    $("#error").html("Invalid NIC NO");
+                } else if (NICNo.length == 10 && !$.isNumeric(NICNo.substr(0, 9))) {
+                    $("#error").html("Invalid NIC NO");
+                }
+                else {
+                    // Year
+                    if (NICNo.length == 10) {
+                        year = "19" + NICNo.substr(0, 2);
+                        dayText = parseInt(NICNo.substr(2, 3));
+                    } else {
+                        year = NICNo.substr(0, 4);
+                        dayText = parseInt(NICNo.substr(4, 3));
+                    }
+
+                    // Gender
+                    if (dayText > 500) {
+                        gender = "Female";
+                        dayText = dayText - 500;
+                    } else {
+                        gender = "Male";
+                    }
+
+                    // Day Digit Validation
+                    if (dayText < 1 && dayText > 366) {
+                        $("#error").html("Invalid NIC NO");
+                    } else {
+
+                        //Month
+                        if (dayText > 335) {
+                            day = dayText - 335;
+                            month = "December";
+                        }
+                        else if (dayText > 305) {
+                            day = dayText - 305;
+                            month = "November";
+                        }
+                        else if (dayText > 274) {
+                            day = dayText - 274;
+                            month = "October";
+                        }
+                        else if (dayText > 244) {
+                            day = dayText - 244;
+                            month = "September";
+                        }
+                        else if (dayText > 213) {
+                            day = dayText - 213;
+                            month = "August";
+                        }
+                        else if (dayText > 182) {
+                            day = dayText - 182;
+                            month = "July";
+                        }
+                        else if (dayText > 152) {
+                            day = dayText - 152;
+                            month = "June";
+                        }
+                        else if (dayText > 121) {
+                            day = dayText - 121;
+                            month = "May";
+                        }
+                        else if (dayText > 91) {
+                            day = dayText - 91;
+                            month = "April";
+                        }
+                        else if (dayText > 60) {
+                            day = dayText - 60;
+                            month = "March";
+                        }
+                        else if (dayText < 32) {
+                            month = "January";
+                            day = dayText;
+                        }
+                        else if (dayText > 31) {
+                            day = dayText - 31;
+                            month = "Febuary";
+                        }
+
+                        // Show Details
+                        $("#gender").html("Gender : " + gender);
+                        $("#bday").html("Birth Date : " + year+' '+month+' '+day);
+
+                    }
+                }
+            });
+        });
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
+        *{font-family: 'Outfit';}
+        body {
+            font-size: 22px;
+            background-color: hsl(217, 54%, 11%);
+
+        }
+
+        .box {
+            box-shadow: 5px 5px 18px hsl(215, 54%, 7%);
+            position: absolute;
+            top: 50%;
+            transform: translate(74%, -50%);
+            border-radius: 40px;
+            padding: 10px;
+            width: 500px;
+            height: 220px;
+            background-color: hsl(216, 50%, 16%);
+            }
+            #error {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 18px;
+        }
+        #gender{
+            text-align: center;
+            margin-top: -00px;
+            font-size: 18px;
+
+        }
+        #bday {
+            text-align: center;
+            margin-top: -10px;
+            font-size: 18px;
+
+        }
+        #nic {
+            text-align: center;
+            margin: auto;
+            height: 20px;
+            width: 200px;
+            font-size: 20px;
+            border-radius: 20px;
+            top: 40%;
+            transform: translate(145px, -30%);
+        }
+        #find {
+            text-align: center;
+            width: 80px;
+            height: 30px;
+            font-size: 14px;
+            border-radius: 90px;
+            background-color: rgb(74, 29, 145);
+            border: none;
+            color: #f0f0f0;
+            cursor: pointer;
+            border: 1px solid rgb(184, 184, 184);
+        }
+        #find:hover{
+            background-color: rgb(82, 43, 145);
+        }
+        #find:active{
+            background-color: rgb(37, 15, 73);
+        }
+        .heading {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 24px;
+        }
+        .box div {
+            top: 50%;
+            transform: translate(260%, 10%);
+            width: 80px;
+            padding: 0px 0px 0px 0px;
+
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <p class="heading" style="color: #f0f0f0;">NIC Birth Date Finder</p>
+        <!--<p style="color: #f0f0f0;">Both New & Old Format</p>-->
+        <input type="text" id="nic" />
+        <div><button id="find">Find</button></div>
+        
+
+        <p id="error" style="color: rgb(255, 24, 24);"></p>
+        <p id="gender" style="color: #f0f0f0;"></p>
+        <p id="bday" style="color: #f0f0f0;"></p>
+
+    </div>
+</body>
+
+</html>
